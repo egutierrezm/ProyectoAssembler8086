@@ -1,0 +1,956 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+codeBot.exe -- emu8086 assembler version: 4.08  
+ 
+[ 01/06/2024  --  21:29:54 ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       
+[   2]        :                                       mescolx macro texto, color
+[   3]        :                                       mov al, texto
+[   4]        :                                       mov bl, color
+[   5]        :                                       mov cx, 35
+[   6]        :                                       mov ah, 9
+[   7]        :                                       int 10h
+[   8]        :                                       mov ah, 9
+[   9]        :                                       mov dx, offset texto
+[  10]        :                                       int 21h
+[  11]        :                                       endm
+[  12]        :                                       
+[  13]        :                                       messaje macro x
+[  14]        :                                       lea dx, x
+[  15]        :                                       mov ah, 9
+[  16]        :                                       int 21h
+[  17]        :                                       endm
+[  18]        :                                       
+[  19]        :                                       data segment
+[  20]    0000: 00 00 00 00 00 00 00 00 00 00 00 00   v db 40 dup(0)
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00                         
+[  21]    0028: 0A 0D 24                              enter db 10,13,36
+[  22]    002B: 45 53 20 50 52 49 4D 4F 24            ms1 db "ES PRIMO$"
+[  23]    0034: 4E 4F 20 45 53 20 50 52 49 4D 4F 24   ms2 db "NO ES PRIMO$"
+                                                    
+[  24]    0040: 4E 55 4D 45 52 4F 20 46 45 4C 49 5A   ms3 db "NUMERO FELIZ$"
+                24                                  
+[  25]    004D: 4E 55 4D 45 52 4F 20 49 4E 46 45 4C   ms4 db "NUMERO INFELIZ$"
+                49 5A 24                            
+[  26]    005C: 4E 55 4D 45 52 4F 20 50 45 52 46 45   ms5 db "NUMERO PERFECTO$"
+                43 54 4F 24                         
+[  27]    006C: 4E 55 4D 45 52 4F 20 49 4D 50 45 52   ms6 db "NUMERO IMPERFECTO$"
+                46 45 43 54 4F 24                   
+[  28]    007E: 2B 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D   ms7 db  "+---------------------------------+$"
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2B 24 
+                                                    
+[  29]    00A2: 7C 20 20 63 6D 64 20 20 7C 20 20 20   ms8 db  "|  cmd  |       descripcion       |$"
+                20 20 20 20 64 65 73 63 72 69 70 63 
+                69 6F 6E 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  30]    00C6: 2B 2D 2D 2D 2D 2D 2D 2D 2B 2D 2D 2D   ms9 db  "+-------+-------------------------+$"
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2B 24 
+                                                    
+[  31]    00EA: 7C 20 20 20 62 20 20 20 7C 20 20 66   ms10 db "|   b   |  fibonacci              |$"
+                69 62 6F 6E 61 63 63 69 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  32]    010E: 7C 20 20 20 66 20 20 20 7C 20 20 66   ms11 db "|   f   |  factorial              |$"
+                61 63 74 6F 72 69 61 6C 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  33]    0132: 7C 20 20 20 76 20 20 20 7C 20 20 6D   ms12 db "|   v   |  maximo comun divisor   |$"
+                61 78 69 6D 6F 20 63 6F 6D 75 6E 20 
+                64 69 76 69 73 6F 72 20 20 20 7C 24 
+                                                    
+[  34]    0156: 7C 20 20 20 6D 20 20 20 7C 20 20 6D   ms13 db "|   m   |  minimo comun multiplo  |$"
+                69 6E 69 6D 6F 20 63 6F 6D 75 6E 20 
+                6D 75 6C 74 69 70 6C 6F 20 20 7C 24 
+                                                    
+[  35]    017A: 7C 20 20 20 64 20 20 20 7C 20 20 64   ms14 db "|   d   |  divisores              |$"
+                69 76 69 73 6F 72 65 73 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  36]    019E: 7C 20 20 20 70 20 20 20 7C 20 20 70   ms15 db "|   p   |  primos menores a       |$"
+                72 69 6D 6F 73 20 6D 65 6E 6F 72 65 
+                73 20 61 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  37]    01C2: 7C 20 20 20 65 20 20 20 7C 20 20 65   ms16 db "|   e   |  es primo               |$"
+                73 20 70 72 69 6D 6F 20 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  38]    01E6: 7C 20 20 20 63 20 20 20 7C 20 20 63   ms17 db "|   c   |  cuadrado               |$"
+                75 61 64 72 61 64 6F 20 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  39]    020A: 7C 20 20 20 75 20 20 20 7C 20 20 63   ms18 db "|   u   |  cubo                   |$"
+                75 62 6F 20 20 20 20 20 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  40]    022E: 7C 20 20 20 74 20 20 20 7C 20 20 70   ms19 db "|   t   |  potencia               |$"
+                6F 74 65 6E 63 69 61 20 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  41]    0252: 7C 20 20 20 72 20 20 20 7C 20 20 72   ms20 db "|   r   |  raiz cuadrada          |$"
+                61 69 7A 20 63 75 61 64 72 61 64 61 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  42]    0276: 7C 20 20 20 7A 20 20 20 7C 20 20 72   ms21 db "|   z   |  raiz                   |$"
+                61 69 7A 20 20 20 20 20 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  43]    029A: 7C 20 20 20 78 20 20 20 7C 20 20 70   ms22 db "|   x   |  promedio               |$"
+                72 6F 6D 65 64 69 6F 20 20 20 20 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  44]    02BE: 7C 20 20 20 6C 20 20 20 7C 20 20 6E   ms23 db "|   l   |  numero feliz           |$"
+                75 6D 65 72 6F 20 66 65 6C 69 7A 20 
+                20 20 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  45]    02E2: 7C 20 20 20 6E 20 20 20 7C 20 20 6E   ms24 db "|   n   |  numero perfecto        |$"
+                75 6D 65 72 6F 20 70 65 72 66 65 63 
+                74 6F 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  46]    0306: 7C 20 20 20 2A 20 20 20 7C 20 20 6D   ms25 db "|   *   |  muestra el menu        |$"
+                75 65 73 74 72 61 20 65 6C 20 6D 65 
+                6E 75 20 20 20 20 20 20 20 20 7C 24 
+                                                    
+[  47]    032A: 2B 2D 2D 2D 2D 2D 2D 2D 2B 2D 2D 2D   ms26 db "+-------+-------------------------+$"
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 
+                2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2B 24 
+                                                    
+[  48]    034E: 00 00                                 aux dw 0
+[  49]    0350: 00 00                                 num dw 0
+[  50]    0352: 00 00                                 ans dw 0
+[  51]    0354: 00 00                                 sum dw 0
+[  52]    0356: 00                                    cnt db 0
+[  53]    0357: 00                                    cnu db 0
+[  54]    0358: 00                                    cnv db 0
+[  55]    0359: 00 00                                 a dw 0
+[  56]    035B: 00 00                                 b dw 0
+[  57]    035D: 00 00                                 x dw 0
+[  58]    035F: 00 00                                 i dw 0
+[  59]    0361: 00                                    n db 0
+[  60]        :                                       ends
+[  61]        :                                       
+[  62]        :                                       stack segment
+[  63]    0370: 00 00 00 00 00 00 00 00 00 00 00 00   dw   128  dup(0)
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00 00 00 00 00 00 00 00 00 
+                00 00 00 00                         
+[  64]        :                                       ends
+[  65]        :                                       
+[  66]        :                                       code segment
+[  67]    0470:                                       start:
+[  68]        :                                       ; set segment registers:
+[  69]    0470: B8 00 00                              mov ax, data
+[  70]    0473: 8E D8                                 mov ds, ax
+[  71]        :                                       ;mov es, ax
+[  72]        :                                       
+[  73]        :                                       ; add your code here
+[  74]    0475: B8 00 00                              mov ax, 0
+[  75]    0478: B9 00 00                              mov cx, 0
+[  76]    047B: 26 8A 0E 80 00                        mov cl, es:[128]
+[  77]    0480: 83 F9 00                              cmp cx, 0
+[  78]    0483: 75 03 E9 BB 06                        jz fin
+[  79]        :                                       ; posicion con el metodo que se desea
+[  80]    0488: BE 82 00                              mov si, 130
+[  81]    048B: 26 8A 04                              mov al, es:[si]
+[  82]    048E: 83 C6 02                              add si,  2
+[  83]    0491: 80 E9 02                              sub cl, 2
+[  84]    0494: 3C 62                                 cmp al, 98
+[  85]    0496: 75 03 E9 6F 02                        jz fibonacci
+[  86]    049B: 3C 66                                 cmp al, 102
+[  87]    049D: 75 03 E9 99 02                        jz factorial
+[  88]    04A2: 3C 76                                 cmp al, 118
+[  89]    04A4: 75 03 E9 C2 02                        jz maximoComunDivisor
+[  90]    04A9: 3C 6D                                 cmp al, 109
+[  91]    04AB: 75 03 E9 EB 02                        jz minimoComunMultiplo
+[  92]    04B0: 3C 64                                 cmp al, 100
+[  93]    04B2: 75 03 E9 2A 03                        jz divisores
+[  94]    04B7: 3C 70                                 cmp al, 112
+[  95]    04B9: 75 03 E9 59 03                        jz primosMenoresA
+[  96]    04BE: 3C 65                                 cmp al, 101
+[  97]    04C0: 75 03 E9 81 03                        jz esPrimo
+[  98]    04C5: 3C 63                                 cmp al, 99
+[  99]    04C7: 75 03 E9 A1 03                        jz cuadrado
+[ 100]    04CC: 3C 75                                 cmp al, 117
+[ 101]    04CE: 75 03 E9 AA 03                        jz cubo
+[ 102]    04D3: 3C 74                                 cmp al, 116
+[ 103]    04D5: 75 03 E9 B5 03                        jz potencia
+[ 104]    04DA: 3C 72                                 cmp al, 114
+[ 105]    04DC: 75 03 E9 D5 03                        jz raizCuadrada
+[ 106]    04E1: 3C 7A                                 cmp al, 122
+[ 107]    04E3: 75 03 E9 7F 04                        jz raiz
+[ 108]    04E8: 3C 78                                 cmp al, 120
+[ 109]    04EA: 75 03 E9 BD 04                        jz promedio
+[ 110]    04EF: 3C 6C                                 cmp al, 108
+[ 111]    04F1: 75 03 E9 69 05                        jz numeroFeliz
+[ 112]    04F6: 3C 6E                                 cmp al, 110
+[ 113]    04F8: 75 03 E9 F5 05                        jz numeroPerfecto
+[ 114]    04FD: 3C 2A                                 cmp al, 42
+[ 115]    04FF: 74 05                                 jz menu
+[ 116]    0501: 74 03 E9 3D 06                        jnz fin
+[ 117]        :                                       ;***********************************
+[ 118]    0506:                                       menu:
+[ 119]    0506: A0 7E 00 B3 0B B9 23 00 B4 09 CD 10   mescolx ms7, 11
+                B4 09 BA 7E 00 CD 21                
+[ 120]    0519: BA 28 00 B4 09 CD 21                  messaje enter
+[ 121]    0520: A0 A2 00 B3 0B B9 23 00 B4 09 CD 10   mescolx ms8, 11
+                B4 09 BA A2 00 CD 21                
+[ 122]    0533: BA 28 00 B4 09 CD 21                  messaje enter
+[ 123]    053A: A0 C6 00 B3 0B B9 23 00 B4 09 CD 10   mescolx ms9, 11
+                B4 09 BA C6 00 CD 21                
+[ 124]    054D: BA 28 00 B4 09 CD 21                  messaje enter
+[ 125]    0554: A0 EA 00 B3 0B B9 23 00 B4 09 CD 10   mescolx ms10, 11
+                B4 09 BA EA 00 CD 21                
+[ 126]    0567: BA 28 00 B4 09 CD 21                  messaje enter
+[ 127]    056E: A0 0E 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms11, 11
+                B4 09 BA 0E 01 CD 21                
+[ 128]    0581: BA 28 00 B4 09 CD 21                  messaje enter
+[ 129]    0588: A0 32 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms12, 11
+                B4 09 BA 32 01 CD 21                
+[ 130]    059B: BA 28 00 B4 09 CD 21                  messaje enter
+[ 131]    05A2: A0 56 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms13, 11
+                B4 09 BA 56 01 CD 21                
+[ 132]    05B5: BA 28 00 B4 09 CD 21                  messaje enter
+[ 133]    05BC: A0 7A 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms14, 11
+                B4 09 BA 7A 01 CD 21                
+[ 134]    05CF: BA 28 00 B4 09 CD 21                  messaje enter
+[ 135]    05D6: A0 9E 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms15, 11
+                B4 09 BA 9E 01 CD 21                
+[ 136]    05E9: BA 28 00 B4 09 CD 21                  messaje enter
+[ 137]    05F0: A0 C2 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms16, 11
+                B4 09 BA C2 01 CD 21                
+[ 138]    0603: BA 28 00 B4 09 CD 21                  messaje enter
+[ 139]    060A: A0 E6 01 B3 0B B9 23 00 B4 09 CD 10   mescolx ms17, 11
+                B4 09 BA E6 01 CD 21                
+[ 140]    061D: BA 28 00 B4 09 CD 21                  messaje enter
+[ 141]    0624: A0 0A 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms18, 11
+                B4 09 BA 0A 02 CD 21                
+[ 142]    0637: BA 28 00 B4 09 CD 21                  messaje enter
+[ 143]    063E: A0 2E 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms19, 11
+                B4 09 BA 2E 02 CD 21                
+[ 144]    0651: BA 28 00 B4 09 CD 21                  messaje enter
+[ 145]    0658: A0 52 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms20, 11
+                B4 09 BA 52 02 CD 21                
+[ 146]    066B: BA 28 00 B4 09 CD 21                  messaje enter
+[ 147]    0672: A0 76 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms21, 11
+                B4 09 BA 76 02 CD 21                
+[ 148]    0685: BA 28 00 B4 09 CD 21                  messaje enter
+[ 149]    068C: A0 9A 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms22, 11
+                B4 09 BA 9A 02 CD 21                
+[ 150]    069F: BA 28 00 B4 09 CD 21                  messaje enter
+[ 151]    06A6: A0 BE 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms23, 11
+                B4 09 BA BE 02 CD 21                
+[ 152]    06B9: BA 28 00 B4 09 CD 21                  messaje enter
+[ 153]    06C0: A0 E2 02 B3 0B B9 23 00 B4 09 CD 10   mescolx ms24, 11
+                B4 09 BA E2 02 CD 21                
+[ 154]    06D3: BA 28 00 B4 09 CD 21                  messaje enter
+[ 155]    06DA: A0 06 03 B3 0B B9 23 00 B4 09 CD 10   mescolx ms25, 11
+                B4 09 BA 06 03 CD 21                
+[ 156]    06ED: BA 28 00 B4 09 CD 21                  messaje enter
+[ 157]    06F4: A0 2A 03 B3 0B B9 23 00 B4 09 CD 10   mescolx ms26, 11
+                B4 09 BA 2A 03 CD 21                
+[ 158]    0707: E9 39 04                              jmp fin
+[ 159]        :                                       
+[ 160]        :                                       ;***********************************
+[ 161]    070A:                                       fibonacci:
+[ 162]    070A: E8 3B 04                              call readOneInput
+[ 163]    070D: 8B CB                                 mov cx, bx
+[ 164]    070F: C7 06 59 03 FF FF                     mov a, -1
+[ 165]    0715: C7 06 5B 03 01 00                     mov b, 1
+[ 166]    071B:                                       fibo:
+[ 167]    071B: 8B 1E 59 03                           mov bx, a
+[ 168]    071F: 03 1E 5B 03                           add bx, b
+[ 169]    0723: A1 5B 03                              mov ax, b
+[ 170]    0726: A3 59 03                              mov a, ax
+[ 171]    0729: 89 1E 5B 03                           mov b, bx
+[ 172]    072D: 51                                    push cx
+[ 173]    072E: 89 1E 52 03                           mov ans, bx
+[ 174]    0732: E8 1F 05                              call print
+[ 175]    0735: 59                                    pop cx
+[ 176]    0736: E2 E3                                 loop fibo
+[ 177]    0738: E9 08 04                              jmp fin
+[ 178]        :                                       
+[ 179]        :                                       ;***********************************
+[ 180]    073B:                                       factorial:
+[ 181]    073B: E8 0A 04                              call readOneInput
+[ 182]    073E: B9 00 00                              mov cx, 0
+[ 183]    0741: 8A CB                                 mov cl, bl
+[ 184]    0743: BB 01 00                              mov bx, 1
+[ 185]    0746: C7 06 5D 03 01 00                     mov x, 1
+[ 186]    074C: 80 F9 00                              cmp cl, 0
+[ 187]    074F: 74 10                                 jz printFactorial
+[ 188]    0751:                                       facto:
+[ 189]    0751: 8B C3                                 mov ax, bx
+[ 190]    0753: 8B 1E 5D 03                           mov bx, x
+[ 191]    0757: F7 E3                                 mul bx
+[ 192]    0759: 8B D8                                 mov bx, ax
+[ 193]    075B: FF 06 5D 03                           inc x
+[ 194]    075F: E2 F0                                 loop facto
+[ 195]    0761:                                       printFactorial:
+[ 196]    0761: 89 1E 52 03                           mov ans, bx
+[ 197]    0765: E8 EC 04                              call print
+[ 198]    0768: E9 D8 03                              jmp fin
+[ 199]        :                                       
+[ 200]        :                                       ;***********************************
+[ 201]    076B:                                       maximoComunDivisor:
+[ 202]    076B: E8 0C 04                              call readTwoInput
+[ 203]    076E:                                       mcd:
+[ 204]    076E: BA 00 00                              mov dx, 0
+[ 205]    0771: A1 59 03                              mov ax, a
+[ 206]    0774: 8B 1E 5B 03                           mov bx, b
+[ 207]    0778: F7 F3                                 div bx
+[ 208]    077A: A1 5B 03                              mov ax, b
+[ 209]    077D: 89 16 5B 03                           mov b, dx
+[ 210]    0781: A3 59 03                              mov a, ax
+[ 211]    0784: 83 3E 5B 03 00                        cmp b, 0
+[ 212]    0789: 74 02                                 jz endMcd
+[ 213]    078B: 75 E1                                 jnz mcd
+[ 214]    078D:                                       endMcd:
+[ 215]    078D: 8B 1E 59 03                           mov bx, a
+[ 216]    0791: 89 1E 52 03                           mov ans, bx
+[ 217]    0795: E8 BC 04                              call print
+[ 218]    0798: E9 A8 03                              jmp fin
+[ 219]        :                                       
+[ 220]        :                                       ;***********************************
+[ 221]    079B:                                       minimoComunMultiplo:
+[ 222]    079B: E8 DC 03                              call readTwoInput
+[ 223]    079E: C7 06 5D 03 00 00                     mov x, 0
+[ 224]    07A4: A1 59 03                              mov ax, a
+[ 225]    07A7: 8B 1E 5B 03                           mov bx, b
+[ 226]    07AB: F7 E3                                 mul bx
+[ 227]    07AD: A3 5D 03                              mov x, ax
+[ 228]    07B0:                                       mcm:
+[ 229]    07B0: BA 00 00                              mov dx, 0
+[ 230]    07B3: A1 59 03                              mov ax, a
+[ 231]    07B6: 8B 1E 5B 03                           mov bx, b
+[ 232]    07BA: F7 F3                                 div bx
+[ 233]    07BC: A1 5B 03                              mov ax, b
+[ 234]    07BF: 89 16 5B 03                           mov b, dx
+[ 235]    07C3: A3 59 03                              mov a, ax
+[ 236]    07C6: 83 3E 5B 03 00                        cmp b, 0
+[ 237]    07CB: 74 02                                 jz endMcm
+[ 238]    07CD: 75 E1                                 jnz mcm
+[ 239]    07CF:                                       endMcm:
+[ 240]    07CF: A1 5D 03                              mov ax, x
+[ 241]    07D2: 8B 1E 59 03                           mov bx, a
+[ 242]    07D6: F7 F3                                 div bx
+[ 243]    07D8: A3 52 03                              mov ans, ax
+[ 244]    07DB: E8 76 04                              call print
+[ 245]    07DE: E9 62 03                              jmp fin
+[ 246]        :                                       
+[ 247]        :                                       ;***********************************
+[ 248]    07E1:                                       divisores:
+[ 249]    07E1: E8 64 03                              call readOneInput
+[ 250]    07E4: 89 1E 4E 03                           mov aux, bx
+[ 251]    07E8: 89 1E 50 03                           mov num, bx
+[ 252]    07EC: FF 06 50 03                           inc num
+[ 253]    07F0: B9 01 00                              mov cx, 1
+[ 254]    07F3:                                       divider:
+[ 255]    07F3: BA 00 00                              mov dx, 0
+[ 256]    07F6: A1 4E 03                              mov ax, aux
+[ 257]    07F9: 8B D9                                 mov bx, cx
+[ 258]    07FB: F7 F3                                 div bx
+[ 259]    07FD: 83 FA 00                              cmp dx, 0
+[ 260]    0800: 74 02                                 jz printDivider
+[ 261]    0802: 75 07                                 jnz searchDivider
+[ 262]    0804:                                       printDivider:
+[ 263]    0804: 89 0E 52 03                           mov ans, cx
+[ 264]    0808: E8 49 04                              call print
+[ 265]    080B:                                       searchDivider:
+[ 266]    080B: 41                                    inc cx
+[ 267]    080C: 3B 0E 50 03                           cmp cx, num
+[ 268]    0810: 74 02                                 jz endDivider
+[ 269]    0812: 75 DF                                 jnz divider
+[ 270]    0814:                                       endDivider:
+[ 271]    0814: E9 2C 03                              jmp fin
+[ 272]        :                                       
+[ 273]        :                                       ;***********************************
+[ 274]    0817:                                       primosMenoresA:
+[ 275]    0817: E8 2E 03                              call readOneInput
+[ 276]    081A: 8B CB                                 mov cx, bx
+[ 277]    081C: C7 06 4E 03 01 00                     mov aux, 1
+[ 278]    0822:                                       for:
+[ 279]    0822: 8B 1E 4E 03                           mov bx, aux
+[ 280]    0826: 89 1E 50 03                           mov num, bx
+[ 281]    082A: E8 99 03                              call checkPrime
+[ 282]    082D: 83 3E 5D 03 00                        cmp x, 0
+[ 283]    0832: 74 09                                 jz noEsPrimo
+[ 284]    0834: A1 4E 03                              mov ax, aux
+[ 285]    0837: A3 52 03                              mov ans, ax
+[ 286]    083A: E8 17 04                              call print
+[ 287]    083D:                                       noEsPrimo:
+[ 288]    083D: FF 06 4E 03                           inc aux
+[ 289]    0841: E2 DF                                 loop for
+[ 290]    0843: E9 FD 02                              jmp fin
+[ 291]        :                                       
+[ 292]        :                                       ;***********************************
+[ 293]    0846:                                       esPrimo:
+[ 294]    0846: E8 FF 02                              call readOneInput
+[ 295]    0849: 89 1E 50 03                           mov num, bx
+[ 296]    084D: E8 76 03                              call checkPrime
+[ 297]    0850: 83 3E 5D 03 00                        cmp x, 0
+[ 298]    0855: 74 02                                 jz printFalse
+[ 299]    0857: 75 0A                                 jnz printTrue
+[ 300]    0859:                                       printFalse:
+[ 301]    0859: BA 34 00 B4 09 CD 21                  messaje ms2
+[ 302]    0860: E9 E0 02                              jmp fin
+[ 303]    0863:                                       printTrue:
+[ 304]    0863: BA 2B 00 B4 09 CD 21                  messaje ms1
+[ 305]    086A: E9 D6 02                              jmp fin
+[ 306]        :                                       
+[ 307]        :                                       ;***********************************
+[ 308]    086D:                                       cuadrado:
+[ 309]    086D: E8 D8 02                              call readOneInput
+[ 310]    0870: 8B C3                                 mov ax, bx
+[ 311]    0872: F7 E3                                 mul bx
+[ 312]    0874: A3 52 03                              mov ans, ax
+[ 313]    0877: E8 DA 03                              call print
+[ 314]    087A: E9 C6 02                              jmp fin
+[ 315]        :                                       
+[ 316]        :                                       ;***********************************
+[ 317]    087D:                                       cubo:
+[ 318]    087D: E8 C8 02                              call readOneInput
+[ 319]    0880: 8B C3                                 mov ax, bx
+[ 320]    0882: F7 E3                                 mul bx
+[ 321]    0884: F7 E3                                 mul bx
+[ 322]    0886: A3 52 03                              mov ans, ax
+[ 323]    0889: E8 C8 03                              call print
+[ 324]    088C: E9 B4 02                              jmp fin
+[ 325]        :                                       
+[ 326]        :                                       ;***********************************
+[ 327]    088F:                                       potencia:
+[ 328]    088F: E8 E8 02                              call readTwoInput
+[ 329]    0892: BB 01 00                              mov bx, 1
+[ 330]    0895:                                       power:
+[ 331]    0895: 8B C3                                 mov ax, bx
+[ 332]    0897: 8B 1E 59 03                           mov bx, a
+[ 333]    089B: F7 E3                                 mul bx
+[ 334]    089D: 8B D8                                 mov bx, ax
+[ 335]    089F: FF 0E 5B 03                           dec b
+[ 336]    08A3: 83 3E 5B 03 00                        cmp b, 0
+[ 337]    08A8: 74 02                                 jz endPower
+[ 338]    08AA: 75 E9                                 jnz power
+[ 339]    08AC:                                       endPower:
+[ 340]    08AC: 89 1E 52 03                           mov ans, bx
+[ 341]    08B0: E8 A1 03                              call print
+[ 342]    08B3: E9 8D 02                              jmp fin
+[ 343]        :                                       
+[ 344]        :                                       ;***********************************
+[ 345]    08B6:                                       raizCuadrada:
+[ 346]    08B6: E8 8F 02                              call readOneInput
+[ 347]    08B9: B9 00 00                              mov cx, 0
+[ 348]    08BC: 83 FB 00                              cmp bx, 0
+[ 349]    08BF: 74 31                                 jz save
+[ 350]    08C1: 83 FB 01                              cmp bx, 1
+[ 351]    08C4: 74 2C                                 jz save
+[ 352]    08C6: C7 06 5F 03 01 00                     mov i, 1
+[ 353]    08CC: B8 01 00                              mov ax, 1
+[ 354]    08CF: 3B C3                                 cmp ax, bx
+[ 355]    08D1: 77 1F                                 ja save
+[ 356]    08D3:                                       root:
+[ 357]    08D3: FF 06 5F 03                           inc i
+[ 358]    08D7: A1 5F 03                              mov ax, i
+[ 359]    08DA: 8B 0E 5F 03                           mov cx, i
+[ 360]    08DE: F7 E1                                 mul cx
+[ 361]    08E0: 3B C3                                 cmp ax, bx
+[ 362]    08E2: 77 02                                 ja endRoot
+[ 363]    08E4: 76 ED                                 jbe root
+[ 364]    08E6:                                       endRoot:
+[ 365]    08E6: FF 0E 5F 03                           dec i
+[ 366]    08EA: A1 5F 03                              mov ax, i
+[ 367]    08ED: A3 52 03                              mov ans, ax
+[ 368]    08F0: EB 04                                 jmp checkDecimal
+[ 369]    08F2:                                       save:
+[ 370]    08F2: 89 1E 52 03                           mov ans, bx
+[ 371]        :                                       
+[ 372]    08F6:                                       checkDecimal:
+[ 373]        :                                       ; obtenemos el primer residuo
+[ 374]    08F6: 8B CB                                 mov cx, bx
+[ 375]    08F8: A1 5F 03                              mov ax, i
+[ 376]    08FB: 8B 1E 5F 03                           mov bx, i
+[ 377]    08FF: F7 E3                                 mul bx
+[ 378]    0901: 2B C8                                 sub cx, ax
+[ 379]        :                                       ; aniadimos 2 ceros para los decimales
+[ 380]    0903: 8B C1                                 mov ax, cx
+[ 381]    0905: BB 64 00                              mov bx, 100
+[ 382]    0908: F7 E3                                 mul bx
+[ 383]    090A: 8B C8                                 mov cx, ax
+[ 384]        :                                       ; iteramos para encontrar el 1er decimal
+[ 385]    090C: A1 5F 03                              mov ax, i
+[ 386]    090F: BB 14 00                              mov bx, 20
+[ 387]    0912: F7 E3                                 mul bx
+[ 388]    0914: E8 18 03                              call getDecimal
+[ 389]    0917: A1 5F 03                              mov ax, i
+[ 390]    091A: A3 59 03                              mov a, ax
+[ 391]        :                                       ; obtenemos el segundo residuo
+[ 392]    091D: 8B C1                                 mov ax, cx
+[ 393]    091F: 2B 06 5D 03                           sub ax, x
+[ 394]        :                                       ; aniadimos dos ceros para los decimales
+[ 395]    0923: BB 64 00                              mov bx, 100
+[ 396]    0926: F7 E3                                 mul bx
+[ 397]    0928: 8B C8                                 mov cx, ax
+[ 398]        :                                       ; iteremos para encontrar el 2do decimal
+[ 399]    092A: A1 52 03                              mov ax, ans
+[ 400]    092D: BB 0A 00                              mov bx, 10
+[ 401]    0930: F7 E3                                 mul bx
+[ 402]    0932: 03 06 59 03                           add ax, a
+[ 403]    0936: BB 14 00                              mov bx, 20
+[ 404]    0939: F7 E3                                 mul bx
+[ 405]    093B: E8 F1 02                              call getDecimal
+[ 406]    093E: A1 5F 03                              mov ax, i
+[ 407]    0941: A3 5B 03                              mov b, ax
+[ 408]        :                                       ; imprimimos la parte entera
+[ 409]    0944: C6 06 58 03 01                        mov cnv, 1
+[ 410]    0949: E8 08 03                              call print
+[ 411]        :                                       ; imprimimos el punto decimal
+[ 412]    094C: B2 2E                                 mov dl, 46
+[ 413]    094E: B4 02                                 mov ah, 2
+[ 414]    0950: CD 21                                 int 21h
+[ 415]        :                                       ; imprimimos el primer decimal
+[ 416]    0952: A1 59 03                              mov ax, a
+[ 417]    0955: A3 52 03                              mov ans, ax
+[ 418]    0958: E8 F9 02                              call print
+[ 419]        :                                       ; imprimimos el segundo decimal
+[ 420]    095B: A1 5B 03                              mov ax, b
+[ 421]    095E: A3 52 03                              mov ans, ax
+[ 422]    0961: E8 F0 02                              call print
+[ 423]    0964: E9 DC 01                              jmp fin
+[ 424]        :                                       
+[ 425]        :                                       ;***********************************
+[ 426]    0967:                                       raiz:
+[ 427]    0967: E8 10 02                              call readTwoInput
+[ 428]    096A: 83 3E 59 03 00                        cmp a, 0
+[ 429]    096F: 74 2F                                 jz imprimir
+[ 430]    0971: 83 3E 59 03 01                        cmp a, 1
+[ 431]    0976: 74 28                                 jz imprimir
+[ 432]    0978: C7 06 5F 03 01 00                     mov i, 1
+[ 433]    097E: B9 00 00                              mov cx, 0
+[ 434]    0981:                                       radical:
+[ 435]    0981: B8 01 00                              mov ax, 1
+[ 436]    0984: 8B 0E 5B 03                           mov cx, b
+[ 437]    0988:                                       ciclo:
+[ 438]    0988: 8B 1E 5F 03                           mov bx, i
+[ 439]    098C: F7 E3                                 mul bx
+[ 440]    098E: E2 F8                                 loop ciclo
+[ 441]    0990: 3B 06 59 03                           cmp ax, a
+[ 442]    0994: 77 06                                 ja endRadical
+[ 443]    0996: FF 06 5F 03                           inc i
+[ 444]    099A: 76 E5                                 jbe radical
+[ 445]    099C:                                       endRadical:
+[ 446]    099C: FF 0E 5F 03                           dec i
+[ 447]    09A0:                                       imprimir:
+[ 448]    09A0: A1 5F 03                              mov ax, i
+[ 449]    09A3: A3 52 03                              mov ans, ax
+[ 450]    09A6: E8 AB 02                              call print
+[ 451]    09A9: E9 97 01                              jmp fin
+[ 452]        :                                       
+[ 453]        :                                       ;***********************************
+[ 454]    09AC:                                       promedio:
+[ 455]    09AC: 88 0E 56 03                           mov cnt, cl
+[ 456]    09B0: B8 00 00                              mov ax, 0
+[ 457]    09B3: BB 00 00                              mov bx, 0
+[ 458]    09B6: B9 00 00                              mov cx, 0
+[ 459]    09B9: C7 06 50 03 00 00                     mov num, 0
+[ 460]    09BF: C7 06 54 03 00 00                     mov sum, 0
+[ 461]    09C5: C6 06 57 03 00                        mov cnu, 0
+[ 462]    09CA:                                       forPromedio:
+[ 463]    09CA: 26 8A 0C                              mov cl, es:[si]
+[ 464]    09CD: 80 F9 0D                              cmp cl, 13
+[ 465]    09D0: 74 30                                 jz endPromedio
+[ 466]    09D2: 80 F9 20                              cmp cl, 32
+[ 467]    09D5: 74 02                                 jz set
+[ 468]    09D7: 75 0D                                 jnz componer
+[ 469]    09D9:                                       set:
+[ 470]    09D9: 01 1E 54 03                           add sum, bx
+[ 471]    09DD: FE 06 57 03                           inc cnu
+[ 472]    09E1: BB 00 00                              mov bx, 0
+[ 473]    09E4: EB 0E                                 jmp noComponer
+[ 474]    09E6:                                       componer:
+[ 475]    09E6: 80 E9 30                              sub cl, 48
+[ 476]    09E9: 8B C3                                 mov ax, bx
+[ 477]    09EB: BB 0A 00                              mov bx, 10
+[ 478]    09EE: F7 E3                                 mul bx
+[ 479]    09F0: 03 C1                                 add ax, cx
+[ 480]    09F2: 8B D8                                 mov bx, ax
+[ 481]    09F4:                                       noComponer:
+[ 482]    09F4: 46                                    inc si
+[ 483]    09F5: FE 0E 56 03                           dec cnt
+[ 484]    09F9: 80 3E 56 03 00                        cmp cnt, 0
+[ 485]    09FE: 74 02                                 jz endPromedio
+[ 486]    0A00: 75 C8                                 jnz forPromedio
+[ 487]    0A02:                                       endPromedio:
+[ 488]    0A02: 01 1E 54 03                           add sum, bx
+[ 489]    0A06: FE 06 57 03                           inc cnu
+[ 490]        :                                       
+[ 491]    0A0A: B8 00 00                              mov ax, 0
+[ 492]    0A0D: BB 00 00                              mov bx, 0
+[ 493]    0A10: BA 00 00                              mov dx, 0
+[ 494]        :                                       ; parte entera
+[ 495]    0A13: A1 54 03                              mov ax, sum
+[ 496]    0A16: 8A 1E 57 03                           mov bl, cnu
+[ 497]    0A1A: F7 F3                                 div bx
+[ 498]    0A1C: C6 06 58 03 01                        mov cnv, 1
+[ 499]    0A21: A3 52 03                              mov ans, ax
+[ 500]    0A24: 52                                    push dx
+[ 501]    0A25: E8 2C 02                              call print
+[ 502]        :                                       ; impresion del punto decimal
+[ 503]    0A28: B2 2E                                 mov dl, 46
+[ 504]    0A2A: B4 02                                 mov ah, 2
+[ 505]    0A2C: CD 21                                 int 21h
+[ 506]    0A2E: 5A                                    pop dx
+[ 507]        :                                       ; obtenemos los decimales
+[ 508]    0A2F: C6 06 56 03 02                        mov cnt, 2
+[ 509]    0A34:                                       forDec:
+[ 510]    0A34: 8B C2                                 mov ax, dx
+[ 511]    0A36: BB 0A 00                              mov bx, 10
+[ 512]    0A39: F7 E3                                 mul bx
+[ 513]    0A3B: BA 00 00                              mov dx, 0
+[ 514]    0A3E: 8A 1E 57 03                           mov bl, cnu
+[ 515]    0A42: F7 F3                                 div bx
+[ 516]    0A44: 52                                    push dx
+[ 517]    0A45: 8A D0                                 mov dl, al
+[ 518]    0A47: 80 C2 30                              add dl, 48
+[ 519]    0A4A: B4 02                                 mov ah, 2
+[ 520]    0A4C: CD 21                                 int 21h
+[ 521]    0A4E: 5A                                    pop dx
+[ 522]    0A4F: FE 0E 56 03                           dec cnt
+[ 523]    0A53: 80 3E 56 03 00                        cmp cnt, 0
+[ 524]    0A58: 74 02                                 jz endForDec
+[ 525]    0A5A: 75 D8                                 jnz forDec
+[ 526]    0A5C:                                       endForDec:
+[ 527]    0A5C: E9 E4 00                              jmp fin
+[ 528]        :                                       
+[ 529]        :                                       ;***********************************
+[ 530]    0A5F:                                       numeroFeliz:
+[ 531]    0A5F: E8 E6 00                              call readOneInput
+[ 532]    0A62: 89 1E 50 03                           mov num, bx
+[ 533]        :                                       ; verificamos si es un numero feliz
+[ 534]    0A66: BE 00 00                              mov si, offset v
+[ 535]    0A69: B9 00 00                              mov cx, 0
+[ 536]    0A6C: C6 06 61 03 00                        mov n, 0
+[ 537]    0A71:                                       happyNumber:
+[ 538]    0A71: C7 06 54 03 00 00                     mov sum, 0
+[ 539]    0A77: C6 06 56 03 00                        mov cnt, 0
+[ 540]    0A7C:                                       while1:
+[ 541]    0A7C: BA 00 00                              mov dx, 0
+[ 542]    0A7F: 8B C3                                 mov ax, bx
+[ 543]    0A81: BB 0A 00                              mov bx, 10
+[ 544]    0A84: F7 F3                                 div bx
+[ 545]    0A86: 52                                    push dx
+[ 546]    0A87: FE 06 56 03                           inc cnt
+[ 547]    0A8B: 3D 00 00                              cmp ax, 0
+[ 548]    0A8E: 74 04                                 jz endWhile1
+[ 549]    0A90: 8B D8                                 mov bx, ax
+[ 550]    0A92: 75 E8                                 jnz while1
+[ 551]    0A94:                                       endWhile1:
+[ 552]    0A94:                                       while2:
+[ 553]    0A94: 58                                    pop ax
+[ 554]    0A95: 8B D8                                 mov bx, ax
+[ 555]    0A97: F7 E3                                 mul bx
+[ 556]    0A99: 01 06 54 03                           add sum, ax
+[ 557]    0A9D: FE 0E 56 03                           dec cnt
+[ 558]    0AA1: 80 3E 56 03 00                        cmp cnt, 0
+[ 559]    0AA6: 74 02                                 jz endWhile2
+[ 560]    0AA8: 75 EA                                 jnz while2
+[ 561]    0AAA:                                       endWhile2:
+[ 562]    0AAA: 83 3E 54 03 01                        cmp sum, 1
+[ 563]    0AAF: 74 26                                 jz endHappyNumber
+[ 564]        :                                       ; verificamos que no exista sum en el
+[ 565]        :                                       ; array y guardamos.
+[ 566]    0AB1: BF 00 00                              mov di, offset v
+[ 567]    0AB4: A1 54 03                              mov ax, sum
+[ 568]    0AB7: 8A 0E 61 03                           mov cl, n
+[ 569]    0ABB: 83 F9 00                              cmp cx, 0
+[ 570]    0ABE: 74 07                                 jz pass
+[ 571]    0AC0:                                       forArray:
+[ 572]    0AC0: 3A 05                                 cmp al, [di]
+[ 573]    0AC2: 74 13                                 jz endHappyNumber
+[ 574]    0AC4: 47                                    inc di
+[ 575]    0AC5: E2 F9                                 loop forArray
+[ 576]    0AC7:                                       pass:
+[ 577]    0AC7: A1 54 03                              mov ax, sum
+[ 578]    0ACA: 89 04                                 mov [si], ax
+[ 579]    0ACC: 46                                    inc si
+[ 580]    0ACD: FE 06 61 03                           inc n
+[ 581]        :                                       ; actualizamos el valor de bx
+[ 582]    0AD1: 8B 1E 54 03                           mov bx, sum
+[ 583]    0AD5: 75 9A                                 jnz happyNumber
+[ 584]    0AD7:                                       endHappyNumber:
+[ 585]    0AD7: 83 3E 54 03 01                        cmp sum, 1
+[ 586]    0ADC: 74 02                                 jz verdad
+[ 587]    0ADE: 75 09                                 jnz falso
+[ 588]    0AE0:                                       verdad:
+[ 589]    0AE0: BA 40 00 B4 09 CD 21                  messaje ms3
+[ 590]    0AE7: EB 5A                                 jmp fin
+[ 591]    0AE9:                                       falso:
+[ 592]    0AE9: BA 4D 00 B4 09 CD 21                  messaje ms4
+[ 593]    0AF0: EB 51                                 jmp fin
+[ 594]        :                                       
+[ 595]        :                                       ;***********************************
+[ 596]    0AF2:                                       numeroPerfecto:
+[ 597]    0AF2: E8 53 00                              call readOneInput
+[ 598]    0AF5: BA 00 00                              mov dx, 0
+[ 599]    0AF8: B9 00 00                              mov cx, 0
+[ 600]    0AFB: 89 1E 50 03                           mov num, bx
+[ 601]    0AFF: C7 06 54 03 00 00                     mov sum, 0
+[ 602]    0B05: B9 01 00                              mov cx, 1
+[ 603]    0B08:                                       findDivider:
+[ 604]    0B08: BA 00 00                              mov dx, 0
+[ 605]    0B0B: A1 50 03                              mov ax, num
+[ 606]    0B0E: 8B D9                                 mov bx, cx
+[ 607]    0B10: F7 F3                                 div bx
+[ 608]    0B12: 83 FA 00                              cmp dx, 0
+[ 609]    0B15: 74 02                                 jz igual
+[ 610]    0B17: 75 04                                 jnz noigual
+[ 611]    0B19:                                       igual:
+[ 612]    0B19: 01 0E 54 03                           add sum, cx
+[ 613]    0B1D:                                       noigual:
+[ 614]    0B1D: 41                                    inc cx
+[ 615]    0B1E: 3B 0E 50 03                           cmp cx, num
+[ 616]    0B22: 74 02                                 jz endFindDivider
+[ 617]    0B24: 75 E2                                 jnz findDivider
+[ 618]    0B26:                                       endFindDivider:
+[ 619]    0B26: A1 50 03                              mov ax, num
+[ 620]    0B29: 8B 1E 54 03                           mov bx, sum
+[ 621]    0B2D: 3B C3                                 cmp ax, bx
+[ 622]    0B2F: 74 02                                 jz perfect
+[ 623]    0B31: 75 09                                 jnz notPerfect
+[ 624]    0B33:                                       perfect:
+[ 625]    0B33: BA 5C 00 B4 09 CD 21                  messaje ms5
+[ 626]    0B3A: EB 07                                 jmp fin
+[ 627]    0B3C:                                       notPerfect:
+[ 628]    0B3C: BA 6C 00 B4 09 CD 21                  messaje ms6
+[ 629]        :                                       
+[ 630]        :                                       ;***********************************
+[ 631]    0B43:                                       fin:
+[ 632]        :                                       ; exit to operating system
+[ 633]    0B43: B8 00 4C                              mov ax, 4c00h
+[ 634]    0B46: CD 21                                 int 21h
+[ 635]        :                                       
+[ 636]        :                                       ;***********************************
+[ 637]        :                                       ; subrutina para leer un solo numero
+[ 638]    0B48:                                       readOneInput:
+[ 639]    0B48: B8 00 00                              mov ax, 0
+[ 640]    0B4B: BB 00 00                              mov bx, 0
+[ 641]    0B4E: 88 0E 57 03                           mov cnu, cl
+[ 642]    0B52: B9 00 00                              mov cx, 0
+[ 643]    0B55:                                       oneInput:
+[ 644]    0B55: 26 8A 0C                              mov cl, es:[si]
+[ 645]    0B58: 80 F9 0D                              cmp cl, 13
+[ 646]    0B5B: 74 1C                                 jz endOneInput
+[ 647]    0B5D: 80 E9 30                              sub cl, 48
+[ 648]    0B60: 8B C3                                 mov ax, bx
+[ 649]    0B62: BB 0A 00                              mov bx, 10
+[ 650]    0B65: F7 E3                                 mul bx
+[ 651]    0B67: 03 C1                                 add ax, cx
+[ 652]    0B69: 8B D8                                 mov bx, ax
+[ 653]    0B6B: FE 0E 57 03                           dec cnu
+[ 654]    0B6F: 80 3E 57 03 00                        cmp cnu, 0
+[ 655]    0B74: 74 03                                 jz endOneInput
+[ 656]    0B76: 46                                    inc si
+[ 657]    0B77: 75 DC                                 jnz oneInput
+[ 658]    0B79:                                       endOneInput:
+[ 659]    0B79: C3                                    ret
+[ 660]        :                                       
+[ 661]        :                                       ; subrutina para leer dos numeros
+[ 662]    0B7A:                                       readTwoInput:
+[ 663]    0B7A: B8 00 00                              mov ax, 0
+[ 664]    0B7D: BB 00 00                              mov bx, 0
+[ 665]    0B80: 88 0E 57 03                           mov cnu, cl
+[ 666]    0B84: B9 00 00                              mov cx, 0
+[ 667]    0B87:                                       twoInput:
+[ 668]    0B87: 26 8A 0C                              mov cl, es:[si]
+[ 669]    0B8A: 80 F9 0D                              cmp cl, 13
+[ 670]    0B8D: 74 32                                 jz endTwoInput
+[ 671]    0B8F: 80 F9 20                              cmp cl, 32
+[ 672]    0B92: 74 02                                 jz reset
+[ 673]    0B94: 75 0F                                 jnz compose
+[ 674]    0B96:                                       reset:
+[ 675]    0B96: 89 1E 59 03                           mov a, bx
+[ 676]    0B9A: B8 00 00                              mov ax, 0
+[ 677]    0B9D: BB 00 00                              mov bx, 0
+[ 678]    0BA0: B9 00 00                              mov cx, 0
+[ 679]    0BA3: EB 0E                                 jmp decompose
+[ 680]    0BA5:                                       compose:
+[ 681]    0BA5: 80 E9 30                              sub cl, 48
+[ 682]    0BA8: 8B C3                                 mov ax, bx
+[ 683]    0BAA: BB 0A 00                              mov bx, 10
+[ 684]    0BAD: F7 E3                                 mul bx
+[ 685]    0BAF: 03 C1                                 add ax, cx
+[ 686]    0BB1: 8B D8                                 mov bx, ax
+[ 687]    0BB3:                                       decompose:
+[ 688]    0BB3: FE 0E 57 03                           dec cnu
+[ 689]    0BB7: 80 3E 57 03 00                        cmp cnu, 0
+[ 690]    0BBC: 74 03                                 jz endTwoInput
+[ 691]    0BBE: 46                                    inc si
+[ 692]    0BBF: 75 C6                                 jnz twoInput
+[ 693]    0BC1:                                       endTwoInput:
+[ 694]    0BC1: 89 1E 5B 03                           mov b, bx
+[ 695]    0BC5: C3                                    ret
+[ 696]        :                                       
+[ 697]        :                                       ; subrutina verifica si es Primo
+[ 698]    0BC6:                                       checkPrime:
+[ 699]    0BC6: 83 3E 50 03 01                        cmp num, 1
+[ 700]    0BCB: 76 53                                 jbe false
+[ 701]    0BCD: 83 3E 50 03 02                        cmp num, 2
+[ 702]    0BD2: 74 54                                 jz true
+[ 703]    0BD4: BA 00 00                              mov dx, 0
+[ 704]    0BD7: A1 50 03                              mov ax, num
+[ 705]    0BDA: BB 02 00                              mov bx, 2
+[ 706]    0BDD: F7 F3                                 div bx
+[ 707]    0BDF: 83 FA 00                              cmp dx, 0
+[ 708]    0BE2: 74 3C                                 jz false
+[ 709]    0BE4: C7 06 5F 03 03 00                     mov i, 3
+[ 710]    0BEA: A1 5F 03                              mov ax, i
+[ 711]    0BED: 8B 1E 5F 03                           mov bx, i
+[ 712]    0BF1: F7 E3                                 mul bx
+[ 713]    0BF3: 3B 06 50 03                           cmp ax, num
+[ 714]    0BF7: 77 2F                                 ja true
+[ 715]    0BF9:                                       prime:
+[ 716]    0BF9: BA 00 00                              mov dx, 0
+[ 717]    0BFC: A1 50 03                              mov ax, num
+[ 718]    0BFF: 8B 1E 5F 03                           mov bx, i
+[ 719]    0C03: F7 F3                                 div bx
+[ 720]    0C05: 83 FA 00                              cmp dx, 0
+[ 721]    0C08: 74 16                                 jz false
+[ 722]    0C0A: 83 06 5F 03 02                        add i, 2
+[ 723]    0C0F: A1 5F 03                              mov ax, i
+[ 724]    0C12: 8B 1E 5F 03                           mov bx, i
+[ 725]    0C16: F7 E3                                 mul bx
+[ 726]    0C18: 3B 06 50 03                           cmp ax, num
+[ 727]    0C1C: 77 0A                                 ja true
+[ 728]    0C1E: 76 D9                                 jbe prime
+[ 729]    0C20:                                       false:
+[ 730]    0C20: C7 06 5D 03 00 00                     mov x, 0
+[ 731]    0C26: EB 06                                 jmp continue
+[ 732]    0C28:                                       true:
+[ 733]    0C28: C7 06 5D 03 01 00                     mov x, 1
+[ 734]    0C2E:                                       continue:
+[ 735]    0C2E: C3                                    ret
+[ 736]        :                                       
+[ 737]        :                                       ; subrutina obtener decimal
+[ 738]    0C2F:                                       getDecimal:
+[ 739]    0C2F: C7 06 5F 03 01 00                     mov i, 1
+[ 740]    0C35:                                       decimal:
+[ 741]    0C35: 50                                    push ax
+[ 742]    0C36: 03 06 5F 03                           add ax, i
+[ 743]    0C3A: 8B 1E 5F 03                           mov bx, i
+[ 744]    0C3E: F7 E3                                 mul bx
+[ 745]    0C40: 3B C1                                 cmp ax, cx
+[ 746]    0C42: 73 0A                                 jae endDecimal
+[ 747]    0C44: A3 5D 03                              mov x, ax
+[ 748]    0C47: 58                                    pop ax
+[ 749]    0C48: FF 06 5F 03                           inc i
+[ 750]    0C4C: 72 E7                                 jb decimal
+[ 751]    0C4E:                                       endDecimal:
+[ 752]    0C4E: FF 0E 5F 03                           dec i
+[ 753]    0C52: 58                                    pop ax
+[ 754]    0C53: C3                                    ret
+[ 755]        :                                       
+[ 756]        :                                       ; subrutina mostrar
+[ 757]    0C54:                                       print:
+[ 758]    0C54: C6 06 56 03 00                        mov cnt, 0
+[ 759]    0C59:                                       getDigit:
+[ 760]    0C59: BA 00 00                              mov dx, 0
+[ 761]    0C5C: A1 52 03                              mov ax, ans
+[ 762]    0C5F: BB 0A 00                              mov bx, 10
+[ 763]    0C62: F7 F3                                 div bx
+[ 764]    0C64: 52                                    push dx
+[ 765]    0C65: FE 06 56 03                           inc cnt
+[ 766]    0C69: A3 52 03                              mov ans, ax
+[ 767]    0C6C: 83 3E 52 03 00                        cmp ans, 0
+[ 768]    0C71: 74 02                                 jz endGetDigit
+[ 769]    0C73: 75 E4                                 jnz getDigit
+[ 770]    0C75:                                       endGetDigit:
+[ 771]    0C75:                                       mostrar:
+[ 772]    0C75: 5A                                    pop dx
+[ 773]    0C76: 80 C2 30                              add dl, 48
+[ 774]    0C79: B4 02                                 mov ah, 2
+[ 775]    0C7B: CD 21                                 int 21h
+[ 776]    0C7D: FE 0E 56 03                           dec cnt
+[ 777]    0C81: 80 3E 56 03 00                        cmp cnt, 0
+[ 778]    0C86: 74 02                                 jz finMostrar
+[ 779]    0C88: 75 EB                                 jnz mostrar
+[ 780]    0C8A:                                       finMostrar:
+[ 781]    0C8A: 80 3E 58 03 01                        cmp cnv, 1
+[ 782]    0C8F: 74 06                                 jz notSpace
+[ 783]    0C91: B2 20                                 mov dl, 32
+[ 784]    0C93: B4 02                                 mov ah, 2
+[ 785]    0C95: CD 21                                 int 21h
+[ 786]    0C97:                                       notSpace:
+[ 787]    0C97: C3                                    ret
+[ 788]        :                                       ends
+[ 789]        :                                       
+[ 790]        :                                       end start
+[ 791]        :                                       
+[ 792]        :                                       
+ 
+===================================================================================================
+ 
+EXE HEADER - bytes from 0000 to 01FF inclusive.
+
+0000: 4D      -   exe signature (M)
+0001: 5A      -   exe signature (Z)
+0002: 98      -   bytes on last page (l.byte)
+0003: 00      -   bytes on last page (h.byte)
+0004: 08      -   512 byte pages in file (l.byte)
+0005: 00      -   512 byte pages in file (h.byte)
+0006: 01      -   relocations (l.byte)
+0007: 00      -   relocations (h.byte)
+0008: 20      -   paragraphs in header (l.byte)
+0009: 00      -   paragraphs in header (h.byte)
+000A: 00      -   minimum memory (l.byte)
+000B: 00      -   minimum memory (h.byte)
+000C: FF      -   maximum memory (l.byte)
+000D: FF      -   maximum memory (h.byte)
+000E: 37      -   SS - stack segment (l.byte)
+000F: 00      -   SS - stack segment (h.byte)
+0010: 00      -   SP - stack pointer (l.byte)
+0011: 01      -   SP - stack pointer (h.byte)
+0012: 02      -   check sum (l.byte)
+0013: 21      -   check sum (h.byte)
+0014: 00      -   IP - instruction pointer (l.byte)
+0015: 00      -   IP - instruction pointer (h.byte)
+0016: 47      -   CS - code segment (l.byte)
+0017: 00      -   CS - code segment (h.byte)
+0018: 1E      -   relocation table adress (l.byte)
+0019: 00      -   relocation table adress (h.byte)
+001A: 00      -   overlay number (l.byte)
+001B: 00      -   overlay number (h.byte)
+001C: 01      -   signature (l.byte)
+001D: 00      -   signature (h.byte)
+001E: 01      -   relocation table - offset inside segment (l.byte)
+001F: 00      -   relocation table - offset inside segment (h.byte)
+0020: 47      -   relocation table - segment anchor (l.byte)
+0021: 00      -   relocation table - segment anchor (h.byte)
+0022 to 01FF  -   reserved relocation area  (00) 
+
+
+
+
+===================================================================================================
